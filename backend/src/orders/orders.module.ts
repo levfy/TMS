@@ -1,8 +1,13 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { OrderEntity } from './order.entity';
+import { OrdersController } from './orders.controller';
+import { OrdersService } from './orders.service';
+import { AuthModule } from '../auth/auth.module';
 
-/**
- * Placeholder Orders Module
- * Will be fully implemented in next phase
- */
-@Module({})
+@Module({
+  imports: [TypeOrmModule.forFeature([OrderEntity]), AuthModule],
+  controllers: [OrdersController],
+  providers: [OrdersService],
+})
 export class OrdersModule {}

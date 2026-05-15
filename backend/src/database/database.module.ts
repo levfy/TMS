@@ -1,6 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserEntity } from '../users/entities/user.entity';
+import { CompanyEntity } from '../companies/entities/company.entity';
+import { DriverEntity } from '../drivers/driver.entity';
+import { VehicleEntity } from '../vehicles/vehicle.entity';
+import { OrderEntity } from '../orders/order.entity';
 
 @Module({
   imports: [
@@ -9,17 +14,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get<string>('DB_HOST', 'localhost'),
+        host: configService.get<string>('DB_HOST', 'postgres'),
         port: configService.get<number>('DB_PORT', 5432),
         username: configService.get<string>('DB_USER', 'kazdispatch'),
-        password: configService.get<string>('DB_PASSWORD'),
+        password: configService.get<string>('DB_PASSWORD', 'SecurePassword123!'),
         database: configService.get<string>('DB_NAME', 'kazdispatch_db'),
-        entities: ['dist/**/*.entity.js'],
-        migrations: ['dist/database/migrations/*.js'],
-        synchronize: true, // auto-create tables for demo
-        logging: configService.get<string>('NODE_ENV') === 'development',
-        poolSize: 10,
-        keepConnectionAlive: true,
+        entities: [UserEntity, CompanyEntity, DriverEntity, VehicleEntity, OrderEntity],
+        synchronize: true,
+        logging: false,
         ssl: false,
       }),
     }),
