@@ -18,13 +18,13 @@ export class OrderEntity {
   @PrimaryGeneratedColumn('uuid') id!: string;
 
   @Column() fromCity!: string;
-  @Column() fromAddress!: string;
+  @Column({ nullable: true }) fromAddress!: string;
   @Column() toCity!: string;
-  @Column() toAddress!: string;
+  @Column({ nullable: true }) toAddress!: string;
   @Column() cargoName!: string;
-  @Column({ nullable: true }) cargoWeight!: number;
-  @Column({ nullable: true }) cargoVolume!: number;
-  @Column({ type: 'decimal', nullable: true }) price!: number;
+  @Column({ nullable: true, type: 'decimal', precision: 10, scale: 2 }) cargoWeight!: number;
+  @Column({ nullable: true, type: 'decimal', precision: 10, scale: 2 }) cargoVolume!: number;
+  @Column({ type: 'decimal', nullable: true, precision: 10, scale: 2 }) price!: number;
   @Column({ type: 'varchar', default: OrderStatus.DRAFT }) status!: OrderStatus;
   @Column({ nullable: true }) notes!: string;
 
