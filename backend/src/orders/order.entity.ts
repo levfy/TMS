@@ -22,9 +22,9 @@ export class OrderEntity {
   @Column() toCity!: string;
   @Column({ nullable: true }) toAddress!: string;
   @Column() cargoName!: string;
-  @Column({ nullable: true, type: 'decimal', precision: 10, scale: 2 }) cargoWeight!: number;
-  @Column({ nullable: true, type: 'decimal', precision: 10, scale: 2 }) cargoVolume!: number;
-  @Column({ type: 'decimal', nullable: true, precision: 10, scale: 2 }) price!: number;
+  @Column({ nullable: true }) cargoWeight!: number;
+  @Column({ nullable: true }) cargoVolume!: number;
+  @Column({ type: 'decimal', nullable: true }) price!: number;
   @Column({ type: 'varchar', default: OrderStatus.DRAFT }) status!: OrderStatus;
   @Column({ nullable: true }) notes!: string;
 
